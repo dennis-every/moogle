@@ -7,5 +7,5 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 100.times do
-  Movie.create(title: Faker::Movie.title)
+  Movie.create(title: Faker::Movie.unique.title)
 end
