@@ -7,7 +7,11 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @movies = Movie.where('title LIKE ?', "%#{params[:title_search]}%")
+    @movies = if params[:title_search].present?
+                Movie.where('title LIKE ?', "%#{params[:title_search]}%")
+              else
+                []
+              end
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update(
